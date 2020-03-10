@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+{
+    "name": "Unity.TextMeshPro.Tests",
+    "references": [
+        "Unity.TextMeshPro"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+=======
+{
+    "name": "Unity.TextMeshPro.Tests",
+    "references": [
+        "Unity.TextMeshPro"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+>>>>>>> parent of 572266e... a
+}
