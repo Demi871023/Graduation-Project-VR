@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/MRT Car.unity
-  isLoaded: 1
-  isActive: 1
