@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.graduationprojectmrt.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\clwo\\Desktop\\20200323 ver2\\MRT\\move\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "Graduation Project MRT [Testing]"
+        }
+      }
+    }
+  ]
+}
