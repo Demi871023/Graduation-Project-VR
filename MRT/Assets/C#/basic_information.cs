@@ -29,9 +29,25 @@ public class basic_information : MonoBehaviour
 
     void writefile() 
     {
-    	string path = "C:/Users/Nina/Desktop/Graduation-Project-VR/inputTXT.txt ";
+    	
 
-        StreamWriter writer = new StreamWriter(path,true);
+    	//create folder
+    	string path = "../file/" + username;
+
+    	while(Directory.Exists(path))
+    	{
+    		path = path + "I";
+    	}
+
+    	Directory.CreateDirectory(path);
+
+
+    	// create file
+    	path = path + "/基本資料.txt" ;
+    	FileStream file = File.Open(path , FileMode.OpenOrCreate,FileAccess.ReadWrite);
+
+    	// write file
+	    StreamWriter writer = new StreamWriter(file);
 
         writer.Write("姓名 : ");
         writer.WriteLine(username);
@@ -42,6 +58,8 @@ public class basic_information : MonoBehaviour
         writer.WriteLine("========================================");
 
         writer.Close();
+    	
+
     }
 
     public void sex_b(bool sex)
