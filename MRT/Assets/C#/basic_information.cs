@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class basic_information : MonoBehaviour
 {
     string username,userage,usersex;
-
+    string year,mouth,day;
     
 
     public void name(Text nameText)
@@ -18,13 +18,21 @@ public class basic_information : MonoBehaviour
     	username = nameText.text;
     }
 
-    public void age(Text ageText)
+    public void getyear(Text ageText)
     {
-    	userage = ageText.text;
+    	year = ageText.text;
+    }
 
-    	Debug.Log(username);
-    	Debug.Log(userage); 
-    	writefile();
+    public void getmouth(Text ageText)
+    {
+        mouth = ageText.text;
+    }
+
+    public void getday(Text ageText)
+    {
+        day = ageText.text;
+
+        writefile();
     }
 
     void writefile() 
@@ -46,16 +54,28 @@ public class basic_information : MonoBehaviour
     	path = path + "/基本資料.txt" ;
     	FileStream file = File.Open(path , FileMode.OpenOrCreate,FileAccess.ReadWrite);
 
+        //birthday to age
+        DateTime dt = DateTime.Now;
+        userage = year + "-" + mouth + "-" + day;
+        DateTime dt1 = Convert.ToDateTime(userage);
+        DateTime dt2 = Convert.ToDateTime(dt.ToShortDateString().ToString());
+        TimeSpan span = dt2.Subtract(dt1);
+        int dayDiff = span.Days + 1;
+        dayDiff /= 365;
+
+
     	// write file
 	    StreamWriter writer = new StreamWriter(file);
 
         writer.Write("姓名 : ");
         writer.WriteLine(username);
-        writer.Write("年紀 : ");
+        writer.Write("生日 : ");
         writer.WriteLine(userage);
+        writer.Write("年紀 : ");
+        writer.WriteLine(dayDiff);
         writer.Write("性別 : ");
         writer.WriteLine(usersex);
-        writer.WriteLine("========================================");
+  
 
         writer.Close();
     	

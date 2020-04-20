@@ -66,6 +66,7 @@
      <Compile Include="Assets\CatChat.cs" />
      <Compile Include="Assets\ChatScript.cs" />
      <Compile Include="Assets\MoleAttackChat.cs" />
+     <Compile Include="Assets\objectB.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
