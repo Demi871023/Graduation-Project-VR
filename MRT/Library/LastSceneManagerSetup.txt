@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/bus station.unity
+=======
+- path: Assets/Scenes/initial.unity
+>>>>>>> 7d14301ccaa922830a4c65453d91f57957b22fc2
   isLoaded: 1
   isActive: 1
