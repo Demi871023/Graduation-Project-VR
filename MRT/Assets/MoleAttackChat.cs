@@ -49,12 +49,12 @@ public class MoleAttackChat : MonoBehaviour
         //ChatBackground.transform.eulerAngles = new eulerAngles();
         ChatBackground.transform.eulerAngles = temp;
         //ChatBackground.rotation = transform.rotation;
-        Debug.Log("========================================");
+        /*Debug.Log("========================================");
         Debug.Log(ChatBackground.transform.eulerAngles.y);
         Debug.Log(transform.eulerAngles.x);
         Debug.Log(transform.eulerAngles.y);
         Debug.Log(transform.eulerAngles.z);
-        Debug.Log(transform.rotation);
+        Debug.Log(transform.rotation);*/
         ChatText.text = "哈哈哈哈";
         //ChatBackground.transform.position = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -77,6 +77,11 @@ public class MoleAttackChat : MonoBehaviour
         ChatText.text = ChatStringList[ListIndex];
         ListIndex++;
         Debug.Log("Hello Hello Hello");
+    }
+
+    public void Print()
+    {
+        Debug.Log("Test Test Test Test");
     }
 }
 

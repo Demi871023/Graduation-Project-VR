@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4520476019392345593}
   m_Layer: 5
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: ChatBoxButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,9 +166,10 @@ GameObject:
   - component: {fileID: 7680346215559707842}
   - component: {fileID: 6746954384449944489}
   - component: {fileID: 8327014139557056355}
+  - component: {fileID: 4009359571975109225}
   m_Layer: 5
   m_Name: NextString
-  m_TagString: Untagged
+  m_TagString: ChatBoxButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +182,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5748130444975738654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6854870487612567730}
@@ -268,6 +269,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &4009359571975109225
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748130444975738654}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 53.36914, y: 44.06128, z: 19.278107}
+  m_Center: {x: 0.1953125, y: 1.574707, z: 3.118513}
 --- !u!1 &6672994144165284418
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,9 +293,10 @@ GameObject:
   - component: {fileID: 7551316670298596649}
   - component: {fileID: 3137487319270383214}
   - component: {fileID: 6673498917192436384}
+  - component: {fileID: 65329166023956962}
   m_Layer: 5
   m_Name: ChatBackgroundWithBtn 1 1
-  m_TagString: Untagged
+  m_TagString: ChatBoxButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,3 +357,16 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!65 &65329166023956962
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6672994144165284418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

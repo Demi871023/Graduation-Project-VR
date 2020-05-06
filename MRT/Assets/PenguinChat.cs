@@ -20,7 +20,7 @@ public class PenguinChat : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Show()
     {
 
         // 讀入劇本台詞檔案
@@ -40,23 +40,12 @@ public class PenguinChat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(transform.position);
-        //Debug.Log(ChatBackground.transform.position);
-        //ChatBackground.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 10, 0));
-        ChatBackground.transform.position = transform.position + new Vector3(0, 3, 0);
-        //Vector3 move = GameObject.transform.eulerAngles;
-        Vector3 temp = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180, transform.eulerAngles.z);
-        //ChatBackground.transform.eulerAngles = new eulerAngles();
-        ChatBackground.transform.eulerAngles = temp;
-        //ChatBackground.rotation = transform.rotation;
-        Debug.Log("========================================");
-        Debug.Log(ChatBackground.transform.eulerAngles.y);
-        Debug.Log(transform.eulerAngles.x);
-        Debug.Log(transform.eulerAngles.y);
-        Debug.Log(transform.eulerAngles.z);
-        Debug.Log(transform.rotation);
-        ChatText.text = "哈哈哈哈";
-        //ChatBackground.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+    	if(ChatBackground != null) {
+	        ChatBackground.transform.position = transform.position + new Vector3(0, 3, 0);
+	        Vector3 temp = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180, transform.eulerAngles.z);
+	        ChatBackground.transform.eulerAngles = temp;
+	        ChatText.text = "哈哈哈哈";
+	    }
 
     }
 

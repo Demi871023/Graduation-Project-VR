@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,18 +15,20 @@ public class ChatScript : MonoBehaviour
     public List<string> ChatStringList = new List<string>();
 
     public GameObject BarPrefab;
+    public GameObject ELF;
     protected Image ChatBackground;
     protected Text ChatText;
     protected Button NextStringBtn;
     protected Button NextStringWithBtn;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void Show(string tag)
     {
 
+        /*Debug.Log(tag);
+
         // 讀入劇本台詞檔案
-        ReadFilePath = Application.dataPath + "/ChatString.txt";
+        ReadFilePath = Application.dataPath + "/ChatDialog/" + tag + ".txt";
         ReadFile(ReadFilePath);
 
         // 在 Canvas 生成 ChatBackgroundWithBtn，底下有子物件：文字與按鈕
@@ -36,14 +38,31 @@ public class ChatScript : MonoBehaviour
         NextStringWithBtn = ChatBackground.GetComponentInChildren<Button>();
 
         // 替按鈕新增監聽事件
-        NextStringWithBtn.onClick.AddListener(Hello);
+        NextStringWithBtn.onClick.AddListener(Hello);*/
+    }
+
+    void Start() 
+    {
+
+        ReadFilePath = Application.dataPath + "/ChatDialog/" + ELF.tag + ".txt";
+        ReadFile(ReadFilePath);
+
+        ChatBackground =  Instantiate(BarPrefab, FindObjectOfType<Canvas>().transform).GetComponent<Image>();
+        ChatText = ChatBackground.GetComponentInChildren<Text>();
+        ChatText.text = null;
+        NextStringWithBtn = ChatBackground.GetComponentInChildren<Button>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ChatBackground.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 2f, 0));
-        //ChatBackground.transform.position = BarPrefab.position + new Vector3(0, 10f, 0);
+        if(ChatBackground != null) {
+            ChatBackground.transform.position = transform.position + new Vector3(0, 3, 0);
+            Vector3 temp = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 180, transform.eulerAngles.z);
+            ChatBackground.transform.eulerAngles = temp;
+            ChatText.text = ChatStringList[0];
+        }
+
     }
 
     // 創建 StreamReader 來讀入 txt 檔案中的句子（以一行為單位）
@@ -64,4 +83,5 @@ public class ChatScript : MonoBehaviour
         ListIndex++;
         Debug.Log("Hello Hello Hello");
     }
+
 }
