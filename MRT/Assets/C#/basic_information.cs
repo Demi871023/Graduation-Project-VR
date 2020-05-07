@@ -4,43 +4,155 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Text;
+using UnityEngine.Networking;
 using System;
 using UnityEngine.SceneManagement;
 
 public class basic_information : MonoBehaviour
 {
-    string username,userage,usersex;
-    string year,mouth,day;
+    public Text error,year,mouth,day,name,gender,noise;
+    int age ;
     
-
-    public void name(Text nameText)
+    
+    public void ONclick()
     {
-    	username = nameText.text;
+
+        error.text = "";
+        var flag = 0;
+        flag = noempty();
+        
+        if(flag != 1)
+        {
+            if(colculatedage())
+            {   
+                //寫進資料夾
+                writefile();
+                //寫進server
+                StartCoroutine("sendtoserver");
+            }
+            else
+            {
+                error.text += "你的年齡很酷喔~再仔細看看有沒有錯吧\n";
+            }
+        }   
     }
 
-    public void getyear(Text ageText)
+    bool colculatedage()
     {
-    	year = ageText.text;
+        DateTime dt = DateTime.Now;
+        string userage = year.text + "-" + mouth.text + "-" + day.text;
+        DateTime dt1 = Convert.ToDateTime(userage);
+        DateTime dt2 = Convert.ToDateTime(dt.ToShortDateString().ToString());
+        TimeSpan span = dt2.Subtract(dt1);
+        int dayDiff= span.Days + 1;
+        dayDiff /= 365;
+
+        if(dayDiff >=0 && dayDiff　<=100)
+        {
+            age = dayDiff;
+            return true;
+        }
+        else
+            return false;
+
     }
 
-    public void getmouth(Text ageText)
+    int noempty()
     {
-        mouth = ageText.text;
+        int flag = 0;
+
+        // 性別判斷
+        if(name.text == "")
+        {
+            error.text += "你的名字是空的喔~\n";
+            flag = 1;
+        }
+
+        // 性別判斷
+        if(gender.text == "")
+        {
+            error.text += "性別要填喔~\n";
+            flag =1;
+        }
+        if(gender.text != "男" && gender.text != "女")
+        {
+            error.text += "幫我按照格式填喔~\n男 或 女\n";
+        }
+
+        // 日期判斷
+        if(year.text == "" || mouth.text == "" || day.text == "" )
+        {
+            error.text += "你的生日沒有填完整喔~\n";
+            flag = 1;
+        }
+
+        //年的判斷
+        int temp = -1;
+        try{
+            temp = int.Parse(year.text);
+        }catch(Exception e)
+        {
+            error.text += "年分的格式是數字喔~\n";
+        }
+
+        // 月的判斷
+        temp = -1;
+        try{
+           temp = int.Parse(mouth.text);
+        }catch(Exception e)
+        {
+            error.text += "月份的格式是數字喔~\n";
+        }
+
+
+        if((temp <=0 || temp >=13 )&& temp != -1)
+        {
+            error.text += "月份超出範圍了喔~\n";
+            flag = 1;
+        }
+
+
+        // 日的判斷
+        temp = -1;
+        try{
+           temp = int.Parse(day.text);
+        }catch(Exception e)
+        {
+            error.text += "日期的格式是數字喔~\n";
+        }
+        if((temp <=0 || temp >=33) && temp != -1)
+        {
+            error.text += "日期超出範圍了喔~\n";
+            flag = 1;
+        }
+
+        // 噪音忍受度判斷
+        float tmp = -1;
+        try{
+            tmp = float.Parse(noise.text);
+        }catch(Exception e)
+        {
+             error.text += "噪音的格式是數字或小數喔~\n";
+        }
+        if(noise.text == "")
+        {
+            error.text += "噪音忍受度也要填喔~\n";
+        }
+
+        if((tmp <0 || tmp >10) && tmp != -1)
+        {
+            error.text += "噪音超出範圍了喔~\n";
+            flag = 1;
+        }
+        return flag;
     }
 
-    public void getday(Text ageText)
-    {
-        day = ageText.text;
-
-        writefile();
-    }
-
-    void writefile() 
+   void  writefile() 
     {
     	
 
     	//create folder
-    	string path = "../file/" + username;
+    	string path = "../file/" + name.text;
 
     	while(Directory.Exists(path))
     	{
@@ -48,73 +160,69 @@ public class basic_information : MonoBehaviour
     	}
 
     	Directory.CreateDirectory(path);
-
-
     	// create file
     	path = path + "/基本資料.txt" ;
     	FileStream file = File.Open(path , FileMode.OpenOrCreate,FileAccess.ReadWrite);
 
-        //birthday to age
-        DateTime dt = DateTime.Now;
-        userage = year + "-" + mouth + "-" + day;
-        DateTime dt1 = Convert.ToDateTime(userage);
-        DateTime dt2 = Convert.ToDateTime(dt.ToShortDateString().ToString());
-        TimeSpan span = dt2.Subtract(dt1);
-        int dayDiff = span.Days + 1;
-        dayDiff /= 365;
-
-
-    	// write file
+    	// write txt
 	    StreamWriter writer = new StreamWriter(file);
-
         writer.Write("姓名 : ");
-        writer.WriteLine(username);
-        writer.Write("生日 : ");
-        writer.WriteLine(userage);
+        writer.WriteLine(name.text);
+        writer.Write("年 : ");
+        writer.WriteLine(year.text);
+        writer.Write("月 : ");
+        writer.WriteLine(mouth.text);
+        writer.Write("日 : ");
+        writer.WriteLine(day.text);
         writer.Write("年紀 : ");
-        writer.WriteLine(dayDiff);
+        writer.WriteLine(age);
         writer.Write("性別 : ");
-        writer.WriteLine(usersex);
-  
-
+        writer.WriteLine(gender.text);
         writer.Close();
     	
 
     }
 
-    public void sex_b(bool sex)
+    IEnumerator sendtoserver()
     {
-    	Debug.Log(sex);
+        WWWForm form = new WWWForm();
+        form.AddField("name", name.text);
+        form.AddField("age",age);
+        form.AddField("year",year.text);
+        form.AddField("mouth",mouth.text);
+        form.AddField("day",day.text);
+        form.AddField("sex",gender.text);
+        form.AddField("noise",noise.text);
 
-    	if(sex == true)
-    	{
-    		usersex = "男生";
-    	}
+        UnityWebRequest www = UnityWebRequest.Post("http://140.136.150.92:3000/login/loginpost",form);
 
-    	else
-    	{
-    		usersex = "女生";
-    	}
-    }
+        yield return www.SendWebRequest();
 
-   public void sex_g(bool sex)
-    {
-    	Debug.Log(sex);
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            string tt = www.downloadHandler.text;
+            string[] word = tt.Split('\"',':',',','}');
+            
+           
+            /*
+            Debug.Log("4 : "+word[4]); //user_name
+            Debug.Log("9 : "+word[9]); //progress_scene
+            Debug.Log("13 : "+word[13]); //progress_problem
+            Debug.Log("17 : "+word[17]); //x
+            Debug.Log("21 : "+word[21]); //y
+            Debug.Log("25 : "+word[25]); //z
+            */
 
-    	if(sex == true)
-    	{
-    		usersex = "女生";    		
-    	}
+            if(word[9] == "1")
+            {
+                Application.LoadLevel(4);
+            }
 
-    	else
-    	{
-    		usersex = "男生";
-
-    	}
-    }
-
-    public void gotoinit()
-    {
-    	SceneManager.LoadScene(4);
+        }
+    
     }
 }
