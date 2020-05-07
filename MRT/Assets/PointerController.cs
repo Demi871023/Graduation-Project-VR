@@ -39,10 +39,10 @@ public class PointerController : SteamVR_LaserPointer
         //chat.Show(obj.tag);
 
   //       ChatBackground = Instantiate(BarPrefab, FindObjectOfType<Canvas>().transform).GetComponent<Image>();
-		// ChatBackground.transform.position = obj.transform.position + new Vector3(0, 1.2f, 0);
-  // 		Vector3 temp = new Vector3(obj.transform.eulerAngles.x, obj.transform.eulerAngles.y + 180, obj.transform.eulerAngles.z);
-  // 		ChatBackground.transform.eulerAngles = temp;
-  // 		ChatText.text = "哈哈哈";
+        // ChatBackground.transform.position = obj.transform.position + new Vector3(0, 1.2f, 0);
+  //        Vector3 temp = new Vector3(obj.transform.eulerAngles.x, obj.transform.eulerAngles.y + 180, obj.transform.eulerAngles.z);
+  //        ChatBackground.transform.eulerAngles = temp;
+  //        ChatText.text = "哈哈哈";
 
         // float dist = 100f;
 
@@ -57,7 +57,7 @@ public class PointerController : SteamVR_LaserPointer
         // argsClick.flags = 0;
         // argsClick.target = hit.transform;
 
-    	 // //得到指向的的物体
+         // //得到指向的的物体
       //   GameObject objtarget = argsClick.target;
       //   //判断物体的Tag是不是Obj 或者是判断是不是可以拾取的物体
       //   if (argsClick..Equals("Object"))
@@ -135,9 +135,9 @@ public class PointerController : SteamVR_LaserPointer
         // }
         // if(e.target.gameObject.tag == "ChatBoxButton")
         // {
-        // 	Debug.Log("Click Button");
-        // 	//Hello();
-        // 	// MoleTemp.Print();
+        //  Debug.Log("Click Button");
+        //  //Hello();
+        //  // MoleTemp.Print();
         // }
         
     }

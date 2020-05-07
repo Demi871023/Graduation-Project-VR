@@ -47,9 +47,14 @@ public class basic_information : MonoBehaviour
         int dayDiff= span.Days + 1;
         dayDiff /= 365;
 
-        if(dayDiff >=0 && dayDiff　<=100)
+        if(dayDiff >=0 && dayDiff　<=100 && year.text.Length == 4)
         {
             age = dayDiff;
+            return true;
+        }
+        else if(dayDiff >=0 && dayDiff　<=100 && year.text.Length == 2)
+        {
+            age = dayDiff-11;
             return true;
         }
         else
@@ -77,6 +82,7 @@ public class basic_information : MonoBehaviour
         if(gender.text != "男" && gender.text != "女")
         {
             error.text += "幫我按照格式填喔~\n男 或 女\n";
+            flag = 1;
         }
 
         // 日期判斷
@@ -93,6 +99,7 @@ public class basic_information : MonoBehaviour
         }catch(Exception e)
         {
             error.text += "年分的格式是數字喔~\n";
+            flag = 1;
         }
 
         // 月的判斷
@@ -102,6 +109,7 @@ public class basic_information : MonoBehaviour
         }catch(Exception e)
         {
             error.text += "月份的格式是數字喔~\n";
+            flag = 1;
         }
 
 
@@ -119,6 +127,7 @@ public class basic_information : MonoBehaviour
         }catch(Exception e)
         {
             error.text += "日期的格式是數字喔~\n";
+            flag = 1;
         }
         if((temp <=0 || temp >=33) && temp != -1)
         {
@@ -133,10 +142,12 @@ public class basic_information : MonoBehaviour
         }catch(Exception e)
         {
              error.text += "噪音的格式是數字或小數喔~\n";
+             flag = 1;
         }
         if(noise.text == "")
         {
             error.text += "噪音忍受度也要填喔~\n";
+            flag = 1;
         }
 
         if((tmp <0 || tmp >10) && tmp != -1)

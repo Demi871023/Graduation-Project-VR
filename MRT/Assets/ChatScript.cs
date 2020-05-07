@@ -21,6 +21,8 @@ public class ChatScript : MonoBehaviour
     protected Button NextStringBtn;
     protected Button NextStringWithBtn;
 
+    public Canvas CanvasWorldSpace;
+
 
     public void Show(string tag)
     {
@@ -44,10 +46,25 @@ public class ChatScript : MonoBehaviour
     void Start() 
     {
 
+
+
         ReadFilePath = Application.dataPath + "/ChatDialog/" + ELF.tag + ".txt";
         ReadFile(ReadFilePath);
 
-        ChatBackground =  Instantiate(BarPrefab, FindObjectOfType<Canvas>().transform).GetComponent<Image>();
+        Canvas[] GetCanvasArray = GameObject.FindObjectsOfType<Canvas>();
+
+        for(var i = 0 ; i < GetCanvasArray.Length ; i++)
+        {
+            //Debug.Log(GetCanvasArray[i].gameObject.name);
+            if(GetCanvasArray[i].gameObject.name == "CanvasWorldSpace")
+            {
+                CanvasWorldSpace = GetCanvasArray[i];
+
+                Debug.Log(i);
+
+            }
+        }
+        ChatBackground =  Instantiate(BarPrefab, CanvasWorldSpace.transform).GetComponent<Image>();
         ChatText = ChatBackground.GetComponentInChildren<Text>();
         ChatText.text = null;
         NextStringWithBtn = ChatBackground.GetComponentInChildren<Button>();
